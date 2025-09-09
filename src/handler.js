@@ -10,6 +10,20 @@ const getAllBooksHandler = (req, res) => {
 const addBookHandler = (req, res) => {
   const { name, author } = req.body;
 
+  if (!name || !name.trim()) {
+    return res.status(400).json({
+      status: "fail",
+      message: "Nama buku tidak boleh kosong",
+    });
+  }
+
+  if (!author || !author.trim()) {
+    return res.status(400).json({
+      status: "fail",
+      message: "Author buku tidak boleh kosong",
+    });
+  }
+
   const id = Date.now();
 
   const newbook = {
@@ -53,6 +67,20 @@ const updateBookByIdHandler = (req, res) => {
   const { name, author } = req.body;
   const numbericBookId = Number(bookId);
 
+  if (!name || !name.trim()) {
+    return res.status(400).json({
+      status: "fail",
+      message: "Nama buku tidak boleh kosong",
+    });
+  }
+
+  if (!author || !author.trim()) {
+    return res.status(400).json({
+      status: "fail",
+      message: "Author buku tidak boleh kosong",
+    });
+  }
+
   const book = books.find((b) => b.id === numbericBookId);
 
   if (!book) {
@@ -71,9 +99,32 @@ const updateBookByIdHandler = (req, res) => {
   });
 };
 
+const deleteBookById = (req, res) => {
+  const { bookId } = req.params;
+  const numbericBookId = Number(bookId);
+
+  const book = books.find((b) => b.id === numbericBookId);
+
+  if (!book) {
+    return res.status(404).json({
+      status: "fail",
+      message: "Buku tidak ditemukan",
+    });
+  }
+
+  const index = books.indexOf(book);
+  books.splice(index, 1);
+
+  res.status(200).json({
+    status: "success",
+    message: "Buku berhasil dihapus",
+  });
+};
+
 export {
   getAllBooksHandler,
   addBookHandler,
   getBookByIdHandler,
   updateBookByIdHandler,
+  deleteBookById,
 };
