@@ -1,4 +1,4 @@
-import expres from "express";
+import express from "express";
 import {
   getAllBooksHandler,
   addBookHandler,
@@ -7,15 +7,15 @@ import {
   deleteBookById,
 } from "../handler/bookHandler.js";
 
-const router = expres.Router();
+const bookRouter = express.Router();
 
-router.get("/books", getAllBooksHandler);
-router.post("/books", addBookHandler);
-router.get("/books/:bookId", getBookByIdHandler);
-router.put("/books/:bookId", updateBookByIdHandler);
-router.delete("/books/:bookId", deleteBookById);
-router.get("/", (req, res) => {
+bookRouter.get("/books", getAllBooksHandler);
+bookRouter.post("/books", addBookHandler);
+bookRouter.get("/books/:bookId", getBookByIdHandler);
+bookRouter.put("/books/:bookId", updateBookByIdHandler);
+bookRouter.delete("/books/:bookId", deleteBookById);
+bookRouter.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-export default router;
+export default bookRouter;

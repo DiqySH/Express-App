@@ -1,9 +1,9 @@
 import { books } from "../data/book.js";
 
 const getAllBooksHandler = (req, res) => {
-  res.json({
+  res.status(200).json({
     status: "success",
-    data: { books },
+    data: books,
   });
 };
 
