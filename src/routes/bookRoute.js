@@ -5,7 +5,7 @@ import {
   getBookByIdHandler,
   updateBookByIdHandler,
   deleteBookById,
-} from "./handler.js";
+} from "../handler/bookHandler.js";
 
 const router = expres.Router();
 
